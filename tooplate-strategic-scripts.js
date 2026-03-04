@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Define the 3 sets of text you want to rotate
       const textSets = [{
             h1: "Screen<br>Alert!",
-            p: "Na Screen Alert!, nós lutamos para todos poderem ser ajudados."
+            p: "At Screen Alert!, we fight so that everyone can be helped."
          },
          
          
