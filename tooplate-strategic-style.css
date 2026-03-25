@@ -355,6 +355,14 @@ body {
 	align-items: start;
 }
 
+.services-layout {
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: center;     /* centraliza verticalmente se houver altura definida */
+    flex-direction: column;  /* garante que os elementos fiquem em coluna */
+    text-align: center;      /* centraliza texto */
+}
+
 .services-content {
 	background: rgba(255, 255, 255, 0.8);
 	border-radius: 25px;
