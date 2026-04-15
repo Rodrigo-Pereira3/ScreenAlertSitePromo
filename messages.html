@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages | Admin Panel</title>
+
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+    >
+</head>
+
+<body class="bg-light">
+
+    <!-- TOP BAR -->
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button
+                class="btn btn-outline-light"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#adminSidebar"
+            >
+                ☰
+            </button>
+            <span class="navbar-brand mb-0 h1">Screen Alert Admin</span>
+        </div>
+    </nav>
+
+    <!-- SIDEBAR -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="adminSidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Menu Admin</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <div class="list-group list-group-flush">
+                <a href="dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
+                <a href="users.html" class="list-group-item list-group-item-action">Users</a>
+                <a href="patients.html" class="list-group-item list-group-item-action">Patients</a>
+                <a href="devices.html" class="list-group-item list-group-item-action">Devices</a>
+                <a href="messages.html" class="list-group-item list-group-item-action active">Messages</a>
+                <a href="logs.html" class="list-group-item list-group-item-action">Logs</a>
+                <a href="schedules.html" class="list-group-item list-group-item-action">Schedules</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mt-4">
+
+        <h1 class="h3 mb-4">Message Management</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Message</th>
+                            <th>Sender</th>
+                            <th>Receiver</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messageTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const table = document.getElementById("messageTable");
+
+        // 🔥 HARD DATA (simula backend)
+        const messages = [
+            {
+                id: 1,
+                text: "Medication reminder",
+                sender: "System",
+                receiver: "Carlos Mendes",
+                date: "2024-03-01",
+                seen: true
+            },
+            {
+                id: 2,
+                text: "Please check device battery",
+                sender: "Maria Silva",
+                receiver: "Joana Rocha",
+                date: "2024-03-02",
+                seen: false
+            },
+            {
+                id: 3,
+                text: "Appointment scheduled",
+                sender: "Admin",
+                receiver: "António Costa",
+                date: "2024-03-03",
+                seen: true
+            },
+            {
+                id: 4,
+                text: "Emergency alert triggered",
+                sender: "System",
+                receiver: "Carlos Mendes",
+                date: "2024-03-04",
+                seen: false
+            }
+        ];
+
+        function renderMessages() {
+            table.innerHTML = "";
+
+            messages.forEach(msg => {
+
+                const badge = msg.seen
+                    ? '<span class="badge bg-success">Seen</span>'
+                    : '<span class="badge bg-warning text-dark">Unseen</span>';
+
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${msg.id}</td>
+                    <td>${msg.text}</td>
+                    <td>${msg.sender}</td>
+                    <td>${msg.receiver}</td>
+                    <td>${msg.date}</td>
+                    <td>${badge}</td>
+                `;
+
+                table.appendChild(row);
+            });
+        }
+
+        renderMessages();
+
+    });
+    </script>
+
+</body>
+</html>
