@@ -8,18 +8,19 @@
 const mobileMenu = document.querySelector('.mobile-menu');
 const navLinks = document.querySelector('.nav-links');
 
-mobileMenu.addEventListener('click', () => {
-   navLinks.classList.toggle('active');
+if (mobileMenu) {
+   mobileMenu.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
 
-   // Animate hamburger menu
-   const spans = mobileMenu.querySelectorAll('span');
-   spans.forEach((span, index) => {
-      span.style.transform = navLinks.classList.contains('active') ?
-         (index === 0 ? 'rotate(45deg) translate(5px, 5px)' :
-            index === 1 ? 'opacity(0)' :
-            'rotate(-45deg) translate(7px, -6px)') : 'none';
+      const spans = mobileMenu.querySelectorAll('span');
+      spans.forEach((span, index) => {
+         span.style.transform = navLinks.classList.contains('active') ?
+            (index === 0 ? 'rotate(45deg) translate(5px, 5px)' :
+               index === 1 ? 'opacity(0)' :
+               'rotate(-45deg) translate(7px, -6px)') : 'none';
+      });
    });
-});
+}
 
 // Active Menu Highlight
 function updateActiveMenu() {
@@ -64,48 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 updateActiveMenu();
 
-// --- Text Rotation Effect for Hero Section ---
-document.addEventListener('DOMContentLoaded', () => {
-   const headline = document.getElementById('hero-headline');
-   const paragraph = document.getElementById('hero-paragraph');
 
-   if (headline && paragraph) {
-      // Define the 3 sets of text you want to rotate
-      const textSets = [{
-            h1: "Screen<br>Alert!",
-            p: "At Screen Alert!, we fight so that everyone can be helped."
-         },
-         
-         
-      ];
-
-      let currentIndex = 0;
-
-      // Function to change the text
-      function changeText() {
-         // Add fade-out class
-         headline.classList.add('text-fade-out');
-         paragraph.classList.add('text-fade-out');
-
-         // Wait for the fade-out to finish before changing the text
-         setTimeout(() => {
-            // Move to the next text set
-            currentIndex = (currentIndex + 1) % textSets.length;
-
-            // Update the text
-            headline.innerHTML = textSets[currentIndex].h1;
-            paragraph.innerHTML = textSets[currentIndex].p;
-
-            // Remove fade-out class to trigger fade-in
-            headline.classList.remove('text-fade-out');
-            paragraph.classList.remove('text-fade-out');
-         }, 500); // This should match the CSS transition duration
-      }
-
-      // Set the interval for text rotation (e.g., every 5 seconds)
-      setInterval(changeText, 5000);
-   }
-});
 
 // Services Tab Functionality
 const serviceTabs = document.querySelectorAll('.service-tab');
@@ -203,26 +163,29 @@ window.addEventListener('scroll', () => {
 
 // Enhanced Form submission
 const contactForm = document.querySelector('.contact-form');
-contactForm.addEventListener('submit', (e) => {
-   e.preventDefault();
 
-   const submitBtn = contactForm.querySelector('.submit-btn');
-   const originalText = submitBtn.textContent;
+if (contactForm) {
+   contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-   submitBtn.textContent = 'Initiating Connection...';
-   submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-   submitBtn.classList.add('loading');
+      const submitBtn = contactForm.querySelector('.submit-btn');
+      const originalText = submitBtn.textContent;
 
-   setTimeout(() => {
-      submitBtn.textContent = 'Partnership Initiated!';
-      submitBtn.classList.remove('loading');
+      submitBtn.textContent = 'Initiating Connection...';
+      submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      submitBtn.classList.add('loading');
+
       setTimeout(() => {
-         submitBtn.textContent = originalText;
-         submitBtn.style.background = 'linear-gradient(135deg, #64748b, #475569)';
-         contactForm.reset();
-      }, 3000);
-   }, 2000);
-});
+         submitBtn.textContent = 'Partnership Initiated!';
+         submitBtn.classList.remove('loading');
+         setTimeout(() => {
+            submitBtn.textContent = originalText;
+            submitBtn.style.background = 'linear-gradient(135deg, #64748b, #475569)';
+            contactForm.reset();
+         }, 3000);
+      }, 2000);
+   });
+}
 
 // Enhanced hover effects for service tabs
 document.querySelectorAll('.service-tab').forEach((tab, index) => {
